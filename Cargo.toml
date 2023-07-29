@@ -1,0 +1,33 @@
+[package]
+name = "url-shortener"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+actix-web = "4"
+actix-cors = "^0.6"
+dotenv = "^0.15"
+sea-orm = { version = "^0.9.2", features = [ "sqlx-postgres", "runtime-actix-native-tls", "macros" ] }
+async-std = { version = "^1.0", features = [ "attributes", "tokio1" ] }
+serde = { version = "^1.0", features = [ "derive" ] }
+serde_json = "^1.0"
+tracing-subscriber = { version = "^0.3", features = [ "env-filter" ] }
+futures = "^0.3"
+env_logger = "^0.9"
+log = "^0.4"
+migration = { path = "migration" }
+rand = "0.8.5"
+regex = "1.5"
+validator = { version = "0.15", features = ["derive"] }
+lazy_static = "1.4.0"
+
+utoipa = { version = "3", features = ["actix_extras"] }
+utoipa-swagger-ui = { version = "3", features = ["actix-web"] }
+
+[dependencies.sea-orm-migration]
+version = "^0"
+features = [
+  "sqlx-postgres",
+  "runtime-actix-native-tls",
+]
