@@ -24,26 +24,31 @@ jobs:
         with:
           command: check
 
-  # test: 
-  #   name: Test
-  #   runs-on: ubuntu-22.04
-  #   steps:
-  #     - name: Checkout source
-  #       uses: actions/checkout@v3
+  test: 
+    name: Test
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
 
-  #     - name: Install stable toolchain
-  #       uses: actions-rs/toolchain@v1
-  #       with:
-  #         toolchain: stable
-  #         override: true
-  #         profile: minimal
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+          profile: minimal
 
-  #     - uses: Swatinem/rust-cache@v1
+      - uses: Swatinem/rust-cache@v1
 
-  #     - name: Run Cargo test
-  #       uses: actions-rs/cargo@v1
-  #       with:
-  #         command: test
+      - name: Run Cargo test
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
+          HOST: ${{ secrets.HOST }}
+          PORT: ${{ secrets.PORT }}
+          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
 
   Lint:
     name: Lint
