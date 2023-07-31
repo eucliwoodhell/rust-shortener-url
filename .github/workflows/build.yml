@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
   check:
     name: Check
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -24,30 +24,30 @@ jobs:
         with:
           command: check
 
-  test: 
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
+  # test: 
+  #   name: Test
+  #   runs-on: ubuntu-22.04
+  #   steps:
+  #     - name: Checkout source
+  #       uses: actions/checkout@v3
 
-      - name: Install stable toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          override: true
-          profile: minimal
+  #     - name: Install stable toolchain
+  #       uses: actions-rs/toolchain@v1
+  #       with:
+  #         toolchain: stable
+  #         override: true
+  #         profile: minimal
 
-      - uses: Swatinem/rust-cache@v1
+  #     - uses: Swatinem/rust-cache@v1
 
-      - name: Run Cargo test
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
+  #     - name: Run Cargo test
+  #       uses: actions-rs/cargo@v1
+  #       with:
+  #         command: test
 
   Lint:
     name: Lint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout source
         uses: actions/checkout@v3

@@ -19,20 +19,23 @@ pub fn get_util_server() -> Result<Server, Error> {
         Port::try_from(env::var("PORT").unwrap()),
         RustLog::try_from(env::var("RUST_LOG").unwrap()),
         DbConnection::try_from(env::var("DATABASE_URL").unwrap()),
+        HostAllowed::try_from(env::var("ALLOWED_HOSTS").unwrap()),
     ) {
-        (Ok(host), Ok(port), Ok(rust_log), Ok(db_connection)) => {
+        (Ok(host), Ok(port), Ok(rust_log), Ok(db_connection), Ok(host_allowed)) => {
             debug!(
-                "host: {}, port: {}, rust_log: {}, db_connection: {}",
+                "host: {}, port: {}, rust_log: {}, db_connection: {}, host_allowed: {}",
                 env::var("HOST").unwrap(),
                 env::var("PORT").unwrap(),
                 env::var("RUST_LOG").unwrap(),
-                env::var("DATABASE_URL").unwrap()
+                env::var("DATABASE_URL").unwrap(),
+                env::var("ALLOWED_HOSTS").unwrap(),
             );
             Ok(Server {
                 host: String::from(host),
                 port: String::from(port),
                 rust_log: String::from(rust_log),
                 db_connection: String::from(db_connection),
+                allowed_hosts: String::from(host_allowed),
             })
         }
         _ => {
@@ -47,7 +50,7 @@ pub fn get_util_server() -> Result<Server, Error> {
 
 pub fn get_cross_origin() -> Cors {
     Cors::default()
-        .allowed_origin("http://localhost:3003")
+        .allowed_origin(env::var("ALLOWED_HOSTS").unwrap().as_str())
         .allowed_methods(vec!["GET", "POST", "DELETE"])
         .allowed_headers(vec![http::header::AUTHORIZATION, http::header::ACCEPT])
         .allowed_header(http::header::CONTENT_TYPE)
@@ -82,6 +85,7 @@ pub struct Server {
     pub port: String,
     pub rust_log: String,
     pub db_connection: String,
+    pub allowed_hosts: String,
 }
 
 pub struct RustLog(String);
@@ -152,6 +156,25 @@ impl TryFrom<String> for Port {
 
 impl From<Port> for String {
     fn from(value: Port) -> Self {
+        value.0
+    }
+}
+
+#[derive(Debug)]
+pub struct HostAllowed(String);
+impl TryFrom<String> for HostAllowed {
+    type Error = ();
+    fn try_from(value: String) -> Result<Self, Self::Error> {
+        if value.is_empty() {
+            return Err(());
+        } else {
+            Ok(Self(value))
+        }
+    }
+}
+
+impl From<HostAllowed> for String {
+    fn from(value: HostAllowed) -> Self {
         value.0
     }
 }
