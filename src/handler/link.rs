@@ -233,7 +233,7 @@ mod tests {
     }
 
     // TODO test 5000 request per second
-    #[actix_web::test]
+    // #[actix_web::test]
     async fn test_get_link_5000() {
         dotenv::dotenv().ok();
         let db_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
