@@ -1,5 +1,11 @@
 name: Buid
 
+env:
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  HOST: ${{ secrets.HOST }}
+  PORT: ${{ secrets.PORT }}
+  ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+
 on: [push, pull_request]
 
 jobs:
@@ -44,11 +50,6 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: test
-        env:
-          DB_URL: ${{ secrets.DB_URL }}
-          HOST: ${{ secrets.HOST }}
-          PORT: ${{ secrets.PORT }}
-          ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
 
   Lint:
     name: Lint
