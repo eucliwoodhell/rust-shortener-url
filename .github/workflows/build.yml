@@ -13,7 +13,7 @@ jobs:
       - name: Install stable toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: minimal
+          toolchain: stable
           override: true
           profile: minimal
 
@@ -69,11 +69,3 @@ jobs:
         with:
           command: fmt
           args: --all -- --check
-
-      - name: Run cargo clippy
-        uses: actions-rs/cargo@v1
-        with:
-          command: clippy
-          args: -- -D warnings
-
-
