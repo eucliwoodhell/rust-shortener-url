@@ -54,4 +54,5 @@ build the image.
 ```sh
 cd rust-shortener-url
 docker build -t rust-shortener-url .
+docker run -p 9090:9090 rust-shortener-url
 ```
