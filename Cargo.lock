@@ -2156,6 +2156,31 @@ dependencies = [
 ]
 
 [[package]]
+name = "rust-shortener-url"
+version = "0.1.0"
+dependencies = [
+ "actix-cors",
+ "actix-web",
+ "async-std",
+ "dotenv",
+ "env_logger",
+ "futures",
+ "lazy_static",
+ "log",
+ "migration",
+ "rand",
+ "regex",
+ "sea-orm 0.9.3",
+ "sea-orm-migration",
+ "serde",
+ "serde_json",
+ "tracing-subscriber",
+ "utoipa",
+ "utoipa-swagger-ui",
+ "validator",
+]
+
+[[package]]
 name = "rust_decimal"
 version = "1.30.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3057,31 +3082,6 @@ dependencies = [
  "form_urlencoded",
  "idna 0.4.0",
  "percent-encoding",
-]
-
-[[package]]
-name = "url-shortener"
-version = "0.1.0"
-dependencies = [
- "actix-cors",
- "actix-web",
- "async-std",
- "dotenv",
- "env_logger",
- "futures",
- "lazy_static",
- "log",
- "migration",
- "rand",
- "regex",
- "sea-orm 0.9.3",
- "sea-orm-migration",
- "serde",
- "serde_json",
- "tracing-subscriber",
- "utoipa",
- "utoipa-swagger-ui",
- "validator",
 ]
 
 [[package]]
